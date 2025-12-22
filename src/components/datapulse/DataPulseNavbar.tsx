@@ -54,7 +54,7 @@ export const DataPulseNavbar = () => {
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-3">
             <Button variant="ghost" size="sm" asChild>
-              <Link to="/contact">Login</Link>
+              <Link to="/datapulse/login">Login</Link>
             </Button>
             <Button 
               size="sm" 
@@ -62,7 +62,7 @@ export const DataPulseNavbar = () => {
               style={{ background: 'var(--dp-gradient)' }}
               asChild
             >
-              <Link to="/contact">Start Free Trial</Link>
+              <Link to="/datapulse/contact">Start Free Trial</Link>
             </Button>
           </div>
 
@@ -98,14 +98,14 @@ export const DataPulseNavbar = () => {
                 ))}
                 <div className="pt-4 border-t border-border space-y-2">
                   <Button variant="outline" className="w-full" asChild>
-                    <Link to="/contact">Login</Link>
+                    <Link to="/datapulse/login">Login</Link>
                   </Button>
                   <Button 
                     className="w-full text-white"
                     style={{ background: 'var(--dp-gradient)' }}
                     asChild
                   >
-                    <Link to="/contact">Start Free Trial</Link>
+                    <Link to="/datapulse/contact">Start Free Trial</Link>
                   </Button>
                 </div>
               </div>
