@@ -68,6 +68,16 @@ export default {
           "teal-light": "hsl(var(--gf-teal-light))",
           cyan: "hsl(var(--gf-cyan))",
         },
+        // DataPulse custom colors
+        dp: {
+          purple: "hsl(var(--dp-purple))",
+          "purple-light": "hsl(var(--dp-purple-light))",
+          violet: "hsl(var(--dp-violet))",
+          pink: "hsl(var(--dp-pink))",
+          orange: "hsl(var(--dp-orange))",
+          blue: "hsl(var(--dp-blue))",
+          green: "hsl(var(--dp-green))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

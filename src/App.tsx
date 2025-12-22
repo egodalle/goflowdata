@@ -9,6 +9,8 @@ import Projects from "./pages/Projects";
 import TechStack from "./pages/TechStack";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import DataPulse from "./pages/DataPulse";
+import DataPulseDemo from "./pages/DataPulseDemo";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +28,8 @@ const App = () => (
           <Route path="/tech-stack" element={<TechStack />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/datapulse" element={<DataPulse />} />
+          <Route path="/datapulse/demo" element={<DataPulseDemo />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
