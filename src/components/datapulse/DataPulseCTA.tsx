@@ -35,7 +35,7 @@ export const DataPulseCTA = () => {
               className="bg-white text-dp-purple hover:bg-white/90 shadow-lg"
               asChild
             >
-              <Link to="/contact">
+              <Link to="/datapulse/contact">
                 Start Free Trial
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>

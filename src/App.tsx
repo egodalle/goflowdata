@@ -11,6 +11,8 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import DataPulse from "./pages/DataPulse";
 import DataPulseDemo from "./pages/DataPulseDemo";
+import DataPulseContact from "./pages/DataPulseContact";
+import DataPulseLogin from "./pages/DataPulseLogin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +32,8 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/datapulse" element={<DataPulse />} />
           <Route path="/datapulse/demo" element={<DataPulseDemo />} />
+          <Route path="/datapulse/contact" element={<DataPulseContact />} />
+          <Route path="/datapulse/login" element={<DataPulseLogin />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

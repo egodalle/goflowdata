@@ -9,8 +9,8 @@ const footerLinks = {
     { label: 'Platforms', href: '/datapulse#platforms' },
   ],
   company: [
-    { label: 'About', href: '/about' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'About', href: '/datapulse#about' },
+    { label: 'Contact', href: '/datapulse/contact' },
     { label: 'Blog', href: '#' },
     { label: 'Careers', href: '#' },
   ],
@@ -18,7 +18,7 @@ const footerLinks = {
     { label: 'Documentation', href: '#' },
     { label: 'API Reference', href: '#' },
     { label: 'Status', href: '#' },
-    { label: 'Support', href: '/contact' },
+    { label: 'Support', href: '/datapulse/contact' },
   ],
   legal: [
     { label: 'Privacy Policy', href: '#' },
