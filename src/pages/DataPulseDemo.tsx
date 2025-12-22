@@ -2,21 +2,18 @@ import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { 
   BarChart3, 
   TrendingUp, 
   Users, 
   Package, 
   Truck,
-  ArrowLeft,
   DollarSign,
   ShoppingCart,
   Percent,
   ArrowUpRight,
   ArrowDownRight
 } from "lucide-react";
-import { Link } from "react-router-dom";
 import { 
   LineChart, 
   Line, 
@@ -33,6 +30,7 @@ import {
   AreaChart,
   Area
 } from "recharts";
+import { DataPulseLayout } from "@/components/datapulse/DataPulseLayout";
 
 // Sample data
 const revenueData = [
@@ -385,74 +383,68 @@ const DataPulseDemo = () => {
   const [activeTab, setActiveTab] = useState("executive");
   
   return (
-    <div className="min-h-screen bg-background">
-      <div className="border-b border-datapulse-purple/20 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link to="/datapulse">
-                <Button variant="ghost" size="sm" className="gap-2">
-                  <ArrowLeft className="h-4 w-4" />
-                  Back
-                </Button>
-              </Link>
+    <DataPulseLayout>
+      <div className="min-h-screen bg-background">
+        <div className="border-b border-dp-purple/20 bg-card/50 backdrop-blur-sm">
+          <div className="container mx-auto px-4 py-6">
+            <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-datapulse-purple to-datapulse-pink bg-clip-text text-transparent">
-                  DataPulse Analytics
+                <h1 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent" style={{ backgroundImage: 'var(--dp-gradient)' }}>
+                  Analytics Dashboard
                 </h1>
-                <p className="text-xs text-muted-foreground">Interactive Demo Dashboard</p>
+                <p className="text-sm text-muted-foreground">Interactive demo with sample e-commerce data</p>
               </div>
+              <Badge variant="outline" className="border-dp-purple text-dp-purple">
+                Sample Data
+              </Badge>
             </div>
-            <Badge variant="outline" className="border-datapulse-purple text-datapulse-purple">
-              Sample Data
-            </Badge>
           </div>
         </div>
+        
+        <div className="container mx-auto px-4 py-6">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+            <TabsList className="grid w-full grid-cols-5 lg:w-auto lg:inline-grid bg-muted/50">
+              <TabsTrigger value="executive" className="gap-2 data-[state=active]:bg-dp-purple data-[state=active]:text-white">
+                <BarChart3 className="h-4 w-4" />
+                <span className="hidden sm:inline">Executive</span>
+              </TabsTrigger>
+              <TabsTrigger value="sales" className="gap-2 data-[state=active]:bg-dp-purple data-[state=active]:text-white">
+                <TrendingUp className="h-4 w-4" />
+                <span className="hidden sm:inline">Sales</span>
+              </TabsTrigger>
+              <TabsTrigger value="customers" className="gap-2 data-[state=active]:bg-dp-purple data-[state=active]:text-white">
+                <Users className="h-4 w-4" />
+                <span className="hidden sm:inline">Customers</span>
+              </TabsTrigger>
+              <TabsTrigger value="products" className="gap-2 data-[state=active]:bg-dp-purple data-[state=active]:text-white">
+                <Package className="h-4 w-4" />
+                <span className="hidden sm:inline">Products</span>
+              </TabsTrigger>
+              <TabsTrigger value="operations" className="gap-2 data-[state=active]:bg-dp-purple data-[state=active]:text-white">
+                <Truck className="h-4 w-4" />
+                <span className="hidden sm:inline">Operations</span>
+              </TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="executive">
+              <ExecutiveDashboard />
+            </TabsContent>
+            <TabsContent value="sales">
+              <SalesDashboard />
+            </TabsContent>
+            <TabsContent value="customers">
+              <CustomerDashboard />
+            </TabsContent>
+            <TabsContent value="products">
+              <ProductDashboard />
+            </TabsContent>
+            <TabsContent value="operations">
+              <OperationalDashboard />
+            </TabsContent>
+          </Tabs>
+        </div>
       </div>
-      
-      <div className="container mx-auto px-4 py-6">
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5 lg:w-auto lg:inline-grid bg-muted/50">
-            <TabsTrigger value="executive" className="gap-2 data-[state=active]:bg-datapulse-purple data-[state=active]:text-white">
-              <BarChart3 className="h-4 w-4" />
-              <span className="hidden sm:inline">Executive</span>
-            </TabsTrigger>
-            <TabsTrigger value="sales" className="gap-2 data-[state=active]:bg-datapulse-purple data-[state=active]:text-white">
-              <TrendingUp className="h-4 w-4" />
-              <span className="hidden sm:inline">Sales</span>
-            </TabsTrigger>
-            <TabsTrigger value="customers" className="gap-2 data-[state=active]:bg-datapulse-purple data-[state=active]:text-white">
-              <Users className="h-4 w-4" />
-              <span className="hidden sm:inline">Customers</span>
-            </TabsTrigger>
-            <TabsTrigger value="products" className="gap-2 data-[state=active]:bg-datapulse-purple data-[state=active]:text-white">
-              <Package className="h-4 w-4" />
-              <span className="hidden sm:inline">Products</span>
-            </TabsTrigger>
-            <TabsTrigger value="operations" className="gap-2 data-[state=active]:bg-datapulse-purple data-[state=active]:text-white">
-              <Truck className="h-4 w-4" />
-              <span className="hidden sm:inline">Operations</span>
-            </TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="executive">
-            <ExecutiveDashboard />
-          </TabsContent>
-          <TabsContent value="sales">
-            <SalesDashboard />
-          </TabsContent>
-          <TabsContent value="customers">
-            <CustomerDashboard />
-          </TabsContent>
-          <TabsContent value="products">
-            <ProductDashboard />
-          </TabsContent>
-          <TabsContent value="operations">
-            <OperationalDashboard />
-          </TabsContent>
-        </Tabs>
-      </div>
-    </div>
+    </DataPulseLayout>
   );
 };
 
