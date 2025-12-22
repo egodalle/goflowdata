@@ -33,6 +33,7 @@ const DataPulseOnboarding = () => {
   const { user } = useDataPulseAuth();
   const [currentStep, setCurrentStep] = useState(1);
   const [isConnecting, setIsConnecting] = useState(false);
+  const [isSettingUpDemo, setIsSettingUpDemo] = useState(false);
   const [copied, setCopied] = useState(false);
   const [formData, setFormData] = useState({
     storeName: '',
@@ -121,6 +122,47 @@ const DataPulseOnboarding = () => {
       });
     } finally {
       setIsConnecting(false);
+    }
+  };
+
+  const handleDemoMode = async () => {
+    if (!user) {
+      toast({
+        title: "Not authenticated",
+        description: "Please log in to use demo mode.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSettingUpDemo(true);
+    
+    try {
+      const { error } = await supabase.from('datapulse_stores').insert({
+        user_id: user.id,
+        store_name: 'Demo Store',
+        store_url: 'demo-store.myshopify.com',
+        platform: 'shopify',
+        is_connected: true,
+        last_synced_at: new Date().toISOString(),
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Demo mode activated!",
+        description: "Explore the dashboard with sample e-commerce data.",
+      });
+      
+      navigate('/datapulse/dashboard');
+    } catch (error: any) {
+      toast({
+        title: "Setup failed",
+        description: error.message || "Failed to set up demo mode.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSettingUpDemo(false);
     }
   };
 
@@ -371,35 +413,55 @@ const DataPulseOnboarding = () => {
               Back
             </Button>
             
-            {currentStep < 3 ? (
-              <Button
-                onClick={handleNext}
-                className="gap-2 text-white"
-                style={{ background: 'var(--dp-gradient)' }}
-              >
-                Next
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-            ) : (
-              <Button
-                onClick={handleConnect}
-                disabled={isConnecting}
-                className="gap-2 text-white"
-                style={{ background: 'var(--dp-gradient)' }}
-              >
-                {isConnecting ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    Connecting...
-                  </>
-                ) : (
-                  <>
-                    Connect Store
-                    <CheckCircle2 className="w-4 h-4" />
-                  </>
-                )}
-              </Button>
-            )}
+            <div className="flex gap-3">
+              {currentStep === 1 && (
+                <Button
+                  variant="ghost"
+                  onClick={handleDemoMode}
+                  disabled={isSettingUpDemo}
+                  className="gap-2 text-muted-foreground hover:text-foreground"
+                >
+                  {isSettingUpDemo ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Setting up...
+                    </>
+                  ) : (
+                    'Skip & Use Demo Data'
+                  )}
+                </Button>
+              )}
+              
+              {currentStep < 3 ? (
+                <Button
+                  onClick={handleNext}
+                  className="gap-2 text-white"
+                  style={{ background: 'var(--dp-gradient)' }}
+                >
+                  Next
+                  <ArrowRight className="w-4 h-4" />
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleConnect}
+                  disabled={isConnecting}
+                  className="gap-2 text-white"
+                  style={{ background: 'var(--dp-gradient)' }}
+                >
+                  {isConnecting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Connecting...
+                    </>
+                  ) : (
+                    <>
+                      Connect Store
+                      <CheckCircle2 className="w-4 h-4" />
+                    </>
+                  )}
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </section>
