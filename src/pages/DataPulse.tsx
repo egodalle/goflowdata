@@ -1,4 +1,4 @@
-import { Layout } from '@/components/Layout';
+import { DataPulseLayout } from '@/components/datapulse/DataPulseLayout';
 import { DataPulseHero } from '@/components/datapulse/DataPulseHero';
 import { DataPulsePlatforms } from '@/components/datapulse/DataPulsePlatforms';
 import { DataPulseFeatures } from '@/components/datapulse/DataPulseFeatures';
@@ -9,15 +9,21 @@ import { DataPulseCTA } from '@/components/datapulse/DataPulseCTA';
 
 const DataPulse = () => {
   return (
-    <Layout>
+    <DataPulseLayout>
       <DataPulseHero />
-      <DataPulsePlatforms />
-      <DataPulseFeatures />
-      <DataPulseKPIs />
+      <section id="platforms">
+        <DataPulsePlatforms />
+      </section>
+      <section id="features">
+        <DataPulseFeatures />
+      </section>
       <DataPulseArchitecture />
-      <DataPulsePricing />
+      <DataPulseKPIs />
+      <section id="pricing">
+        <DataPulsePricing />
+      </section>
       <DataPulseCTA />
-    </Layout>
+    </DataPulseLayout>
   );
 };
 
