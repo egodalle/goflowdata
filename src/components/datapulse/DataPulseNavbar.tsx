@@ -53,7 +53,7 @@ export const DataPulseNavbar = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="ghost" size="sm" asChild>
+            <Button variant="ghost" size="sm" className="hover:bg-dp-purple/10 hover:text-dp-purple" asChild>
               <Link to="/datapulse/login">Login</Link>
             </Button>
             <Button 
@@ -97,7 +97,7 @@ export const DataPulseNavbar = () => {
                   </Link>
                 ))}
                 <div className="pt-4 border-t border-border space-y-2">
-                  <Button variant="outline" className="w-full" asChild>
+                  <Button variant="outline" className="w-full border-dp-purple/30 hover:bg-dp-purple/10 hover:text-dp-purple" asChild>
                     <Link to="/datapulse/login">Login</Link>
                   </Button>
                   <Button 
