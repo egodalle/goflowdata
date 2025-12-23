@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Check, ShoppingBag, Store, Package, Building2, Warehouse } from 'lucide-react';
+import { Check, ShoppingBag, Store, Package, Building2, Warehouse, Music } from 'lucide-react';
 
 const platforms = [
   {
@@ -41,6 +41,14 @@ const platforms = [
     priority: 'P2',
     color: 'from-[#F46F25] to-[#EC6737]',
     streams: ['Orders', 'Products', 'Customers', 'Categories', 'Inventory']
+  },
+  {
+    name: 'TikTok Shop',
+    marketShare: '5%',
+    icon: Music,
+    priority: 'P1',
+    color: 'from-[#00F2EA] to-[#FF0050]',
+    streams: ['Orders', 'Products', 'Inventory', 'Returns', 'Settlements', 'Promotions']
   },
 ];
 
