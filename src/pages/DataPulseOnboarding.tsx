@@ -15,16 +15,40 @@ import {
   Loader2,
   ExternalLink,
   Copy,
-  Check
+  Check,
+  ShoppingBag,
+  Music
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { useDataPulseAuth } from '@/contexts/DataPulseAuthContext';
 
+const platforms = [
+  {
+    id: 'shopify',
+    name: 'Shopify',
+    icon: ShoppingBag,
+    color: 'from-[#96BF48] to-[#5E8E3E]',
+    description: 'Connect your Shopify store',
+    urlPlaceholder: 'mystore.myshopify.com',
+    urlHint: 'Enter your myshopify.com domain',
+  },
+  {
+    id: 'tiktok',
+    name: 'TikTok Shop',
+    icon: Music,
+    color: 'from-[#00F2EA] to-[#FF0050]',
+    description: 'Connect your TikTok Shop',
+    urlPlaceholder: 'your-tiktok-shop-id',
+    urlHint: 'Enter your TikTok Shop seller ID',
+  },
+];
+
 const steps = [
-  { id: 1, title: 'Store Details', description: 'Enter your Shopify store URL' },
-  { id: 2, title: 'API Credentials', description: 'Connect with API keys' },
-  { id: 3, title: 'Confirm & Connect', description: 'Review and complete setup' },
+  { id: 1, title: 'Platform', description: 'Choose your e-commerce platform' },
+  { id: 2, title: 'Store Details', description: 'Enter your store information' },
+  { id: 3, title: 'API Credentials', description: 'Connect with API keys' },
+  { id: 4, title: 'Confirm & Connect', description: 'Review and complete setup' },
 ];
 
 const DataPulseOnboarding = () => {
@@ -32,6 +56,7 @@ const DataPulseOnboarding = () => {
   const navigate = useNavigate();
   const { user } = useDataPulseAuth();
   const [currentStep, setCurrentStep] = useState(1);
+  const [selectedPlatform, setSelectedPlatform] = useState<string | null>(null);
   const [isConnecting, setIsConnecting] = useState(false);
   const [isSettingUpDemo, setIsSettingUpDemo] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -43,18 +68,30 @@ const DataPulseOnboarding = () => {
     accessToken: '',
   });
 
+  const currentPlatform = platforms.find(p => p.id === selectedPlatform);
+
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleCopyWebhook = () => {
-    navigator.clipboard.writeText('https://api.datapulse.io/webhooks/shopify');
+    navigator.clipboard.writeText(`https://api.datapulse.io/webhooks/${selectedPlatform || 'shopify'}`);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const handleNext = () => {
     if (currentStep === 1) {
+      if (!selectedPlatform) {
+        toast({
+          title: "Select a platform",
+          description: "Please choose an e-commerce platform to continue.",
+          variant: "destructive",
+        });
+        return;
+      }
+    }
+    if (currentStep === 2) {
       if (!formData.storeName || !formData.storeUrl) {
         toast({
           title: "Missing information",
@@ -64,17 +101,17 @@ const DataPulseOnboarding = () => {
         return;
       }
     }
-    if (currentStep === 2) {
+    if (currentStep === 3) {
       if (!formData.accessToken) {
         toast({
           title: "Missing credentials",
-          description: "Please enter your Admin API access token.",
+          description: "Please enter your API access token.",
           variant: "destructive",
         });
         return;
       }
     }
-    setCurrentStep((prev) => Math.min(prev + 1, 3));
+    setCurrentStep((prev) => Math.min(prev + 1, 4));
   };
 
   const handleBack = () => {
@@ -101,7 +138,7 @@ const DataPulseOnboarding = () => {
         api_key: formData.apiKey || null,
         api_secret: formData.apiSecret || null,
         access_token: formData.accessToken,
-        platform: 'shopify',
+        platform: selectedPlatform || 'shopify',
         is_connected: true,
         last_synced_at: new Date().toISOString(),
       });
@@ -110,7 +147,7 @@ const DataPulseOnboarding = () => {
 
       toast({
         title: "Store connected!",
-        description: "Your Shopify store has been successfully connected to DataPulse.",
+        description: `Your ${currentPlatform?.name || 'store'} has been successfully connected to DataPulse.`,
       });
       
       navigate('/datapulse/dashboard');
@@ -218,10 +255,59 @@ const DataPulseOnboarding = () => {
                       <div className="p-2 rounded-lg" style={{ background: 'var(--dp-gradient)' }}>
                         <Store className="w-5 h-5 text-white" />
                       </div>
-                      <CardTitle>Connect Your Shopify Store</CardTitle>
+                      <CardTitle>Choose Your Platform</CardTitle>
                     </div>
                     <CardDescription>
-                      Enter your Shopify store details to get started with analytics
+                      Select the e-commerce platform you want to connect
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid gap-4">
+                      {platforms.map((platform) => (
+                        <button
+                          key={platform.id}
+                          onClick={() => setSelectedPlatform(platform.id)}
+                          className={`flex items-center gap-4 p-4 rounded-xl border-2 transition-all text-left ${
+                            selectedPlatform === platform.id
+                              ? 'border-dp-purple bg-dp-purple/5'
+                              : 'border-border hover:border-dp-purple/50'
+                          }`}
+                        >
+                          <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${platform.color} flex items-center justify-center shadow-lg`}>
+                            <platform.icon className="w-6 h-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="font-semibold">{platform.name}</h3>
+                            <p className="text-sm text-muted-foreground">{platform.description}</p>
+                          </div>
+                          {selectedPlatform === platform.id && (
+                            <CheckCircle2 className="w-6 h-6 text-dp-purple" />
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            )}
+
+            {currentStep === 2 && currentPlatform && (
+              <motion.div
+                key="step2"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+              >
+                <Card className="border-dp-purple/20">
+                  <CardHeader>
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className={`p-2 rounded-lg bg-gradient-to-br ${currentPlatform.color}`}>
+                        <currentPlatform.icon className="w-5 h-5 text-white" />
+                      </div>
+                      <CardTitle>Connect Your {currentPlatform.name}</CardTitle>
+                    </div>
+                    <CardDescription>
+                      Enter your store details to get started with analytics
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
@@ -235,15 +321,15 @@ const DataPulseOnboarding = () => {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="storeUrl">Store URL</Label>
+                      <Label htmlFor="storeUrl">Store URL / ID</Label>
                       <Input
                         id="storeUrl"
-                        placeholder="mystore.myshopify.com"
+                        placeholder={currentPlatform.urlPlaceholder}
                         value={formData.storeUrl}
                         onChange={(e) => handleChange('storeUrl', e.target.value)}
                       />
                       <p className="text-sm text-muted-foreground">
-                        Enter your myshopify.com domain (e.g., mystore.myshopify.com)
+                        {currentPlatform.urlHint}
                       </p>
                     </div>
                   </CardContent>
@@ -251,9 +337,9 @@ const DataPulseOnboarding = () => {
               </motion.div>
             )}
 
-            {currentStep === 2 && (
+            {currentStep === 3 && currentPlatform && (
               <motion.div
-                key="step2"
+                key="step3"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
@@ -267,7 +353,7 @@ const DataPulseOnboarding = () => {
                       <CardTitle>API Credentials</CardTitle>
                     </div>
                     <CardDescription>
-                      Connect DataPulse to your Shopify store using Admin API credentials
+                      Connect DataPulse to your {currentPlatform.name} using API credentials
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
@@ -276,20 +362,31 @@ const DataPulseOnboarding = () => {
                         <ExternalLink className="w-4 h-4" />
                         How to get your API credentials
                       </h4>
-                      <ol className="text-sm text-muted-foreground space-y-1 list-decimal list-inside">
-                        <li>Go to your Shopify Admin → Settings → Apps and sales channels</li>
-                        <li>Click "Develop apps" and create a new app</li>
-                        <li>Configure Admin API scopes (read_orders, read_products, read_customers)</li>
-                        <li>Install the app and copy the Admin API access token</li>
-                      </ol>
+                      {selectedPlatform === 'shopify' ? (
+                        <ol className="text-sm text-muted-foreground space-y-1 list-decimal list-inside">
+                          <li>Go to your Shopify Admin → Settings → Apps and sales channels</li>
+                          <li>Click "Develop apps" and create a new app</li>
+                          <li>Configure Admin API scopes (read_orders, read_products, read_customers)</li>
+                          <li>Install the app and copy the Admin API access token</li>
+                        </ol>
+                      ) : (
+                        <ol className="text-sm text-muted-foreground space-y-1 list-decimal list-inside">
+                          <li>Go to TikTok Shop Seller Center → My Account → API Management</li>
+                          <li>Create a new API application</li>
+                          <li>Select required permissions (Orders, Products, Inventory)</li>
+                          <li>Copy the App Key and App Secret</li>
+                        </ol>
+                      )}
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="accessToken">Admin API Access Token *</Label>
+                      <Label htmlFor="accessToken">
+                        {selectedPlatform === 'shopify' ? 'Admin API Access Token *' : 'App Secret *'}
+                      </Label>
                       <Input
                         id="accessToken"
                         type="password"
-                        placeholder="shpat_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                        placeholder={selectedPlatform === 'shopify' ? 'shpat_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx' : 'Your TikTok Shop App Secret'}
                         value={formData.accessToken}
                         onChange={(e) => handleChange('accessToken', e.target.value)}
                       />
@@ -297,20 +394,24 @@ const DataPulseOnboarding = () => {
 
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="apiKey">API Key (optional)</Label>
+                        <Label htmlFor="apiKey">
+                          {selectedPlatform === 'shopify' ? 'API Key (optional)' : 'App Key *'}
+                        </Label>
                         <Input
                           id="apiKey"
-                          placeholder="API Key"
+                          placeholder={selectedPlatform === 'shopify' ? 'API Key' : 'Your TikTok Shop App Key'}
                           value={formData.apiKey}
                           onChange={(e) => handleChange('apiKey', e.target.value)}
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="apiSecret">API Secret (optional)</Label>
+                        <Label htmlFor="apiSecret">
+                          {selectedPlatform === 'shopify' ? 'API Secret (optional)' : 'Shop Cipher (optional)'}
+                        </Label>
                         <Input
                           id="apiSecret"
                           type="password"
-                          placeholder="API Secret"
+                          placeholder={selectedPlatform === 'shopify' ? 'API Secret' : 'Shop Cipher'}
                           value={formData.apiSecret}
                           onChange={(e) => handleChange('apiSecret', e.target.value)}
                         />
@@ -322,7 +423,7 @@ const DataPulseOnboarding = () => {
                       <div className="flex gap-2">
                         <Input
                           readOnly
-                          value="https://api.datapulse.io/webhooks/shopify"
+                          value={`https://api.datapulse.io/webhooks/${selectedPlatform}`}
                           className="bg-muted"
                         />
                         <Button variant="outline" size="icon" onClick={handleCopyWebhook}>
@@ -330,7 +431,7 @@ const DataPulseOnboarding = () => {
                         </Button>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Add this webhook URL in Shopify for real-time order updates
+                        Add this webhook URL in {currentPlatform.name} for real-time updates
                       </p>
                     </div>
                   </CardContent>
@@ -338,9 +439,9 @@ const DataPulseOnboarding = () => {
               </motion.div>
             )}
 
-            {currentStep === 3 && (
+            {currentStep === 4 && currentPlatform && (
               <motion.div
-                key="step3"
+                key="step4"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
@@ -362,15 +463,10 @@ const DataPulseOnboarding = () => {
                       <div className="flex justify-between items-center pb-4 border-b border-border">
                         <span className="text-muted-foreground">Platform</span>
                         <span className="font-medium flex items-center gap-2">
-                          <img 
-                            src="https://cdn.shopify.com/s/files/1/0633/0959/4911/files/shopify-logo.png" 
-                            alt="Shopify" 
-                            className="w-5 h-5"
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).style.display = 'none';
-                            }}
-                          />
-                          Shopify
+                          <div className={`w-5 h-5 rounded bg-gradient-to-br ${currentPlatform.color} flex items-center justify-center`}>
+                            <currentPlatform.icon className="w-3 h-3 text-white" />
+                          </div>
+                          {currentPlatform.name}
                         </span>
                       </div>
                       <div className="flex justify-between items-center pb-4 border-b border-border">
@@ -378,11 +474,11 @@ const DataPulseOnboarding = () => {
                         <span className="font-medium">{formData.storeName}</span>
                       </div>
                       <div className="flex justify-between items-center pb-4 border-b border-border">
-                        <span className="text-muted-foreground">Store URL</span>
+                        <span className="text-muted-foreground">Store URL / ID</span>
                         <span className="font-medium">{formData.storeUrl}</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-muted-foreground">Access Token</span>
+                        <span className="text-muted-foreground">API Credentials</span>
                         <span className="font-medium text-datapulse-green">✓ Configured</span>
                       </div>
                     </div>
@@ -432,7 +528,7 @@ const DataPulseOnboarding = () => {
                 </Button>
               )}
               
-              {currentStep < 3 ? (
+              {currentStep < 4 ? (
                 <Button
                   onClick={handleNext}
                   className="gap-2 text-white"
