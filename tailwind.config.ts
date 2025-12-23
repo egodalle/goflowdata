@@ -78,6 +78,14 @@ export default {
           blue: "hsl(var(--dp-blue))",
           green: "hsl(var(--dp-green))",
         },
+        // DataPulse aliases for easier usage
+        datapulse: {
+          purple: "hsl(var(--dp-purple))",
+          pink: "hsl(var(--dp-pink))",
+          orange: "hsl(var(--dp-orange))",
+          blue: "hsl(var(--dp-blue))",
+          green: "hsl(var(--dp-green))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

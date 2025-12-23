@@ -41,10 +41,11 @@ export const DataPulseHero = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
                 size="xl" 
-                className="bg-dp-purple hover:bg-dp-purple/90 text-white shadow-lg hover:shadow-xl transition-all"
+                className="text-white shadow-lg hover:shadow-xl transition-all"
+                style={{ background: 'var(--dp-gradient)' }}
                 asChild
               >
-                <Link to="/contact">
+                <Link to="/datapulse/contact">
                   Start Free Trial
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>

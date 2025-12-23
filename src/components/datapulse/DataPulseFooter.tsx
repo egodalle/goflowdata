@@ -9,21 +9,21 @@ const footerLinks = {
     { label: 'Platforms', href: '/datapulse#platforms' },
   ],
   company: [
-    { label: 'About', href: '/datapulse#about' },
+    { label: 'About GoFlow', href: '/about' },
     { label: 'Contact', href: '/datapulse/contact' },
-    { label: 'Blog', href: '#' },
-    { label: 'Careers', href: '#' },
+    { label: 'Services', href: '/services' },
+    { label: 'Projects', href: '/projects' },
   ],
   resources: [
-    { label: 'Documentation', href: '#' },
-    { label: 'API Reference', href: '#' },
-    { label: 'Status', href: '#' },
+    { label: 'Documentation', href: '/datapulse/contact' },
+    { label: 'API Reference', href: '/datapulse/contact' },
+    { label: 'Status', href: '/datapulse/contact' },
     { label: 'Support', href: '/datapulse/contact' },
   ],
   legal: [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Cookie Policy', href: '#' },
+    { label: 'Privacy Policy', href: '/datapulse/contact' },
+    { label: 'Terms of Service', href: '/datapulse/contact' },
+    { label: 'Cookie Policy', href: '/datapulse/contact' },
   ],
 };
 
