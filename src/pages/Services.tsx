@@ -1,19 +1,18 @@
 import { motion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
 import { CTASection } from '@/components/CTASection';
-import { 
-  Database, 
-  GitBranch, 
-  Workflow, 
-  Cloud, 
-  BarChart3,
-  CheckCircle2
-} from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
+
+import airbyteLogo from '@/assets/logos/airbyte-logo.png';
+import dbtLogo from '@/assets/logos/dbt-logo.png';
+import airflowLogo from '@/assets/logos/airflow-logo.png';
+import bigqueryLogo from '@/assets/logos/bigquery-logo.svg';
+import lookerLogo from '@/assets/logos/looker-logo.webp';
 
 const services = [
   {
     id: 'extraction',
-    icon: Database,
+    logo: airbyteLogo,
     title: 'Data Extraction & Ingestion',
     description: 'Connect to any data source with reliable, scalable extraction pipelines.',
     longDescription: 'We build robust data extraction pipelines that connect to your entire data ecosystem. From SaaS applications and databases to APIs and flat files, we ensure every data source is captured and centralized.',
@@ -28,7 +27,7 @@ const services = [
   },
   {
     id: 'transformation',
-    icon: GitBranch,
+    logo: dbtLogo,
     title: 'Data Transformation & Modeling',
     description: 'Transform raw data into analytics-ready models with best practices.',
     longDescription: 'We apply analytics engineering principles to transform your raw data into clean, tested, and documented data models. Using dbt, we create a single source of truth that your entire organization can rely on.',
@@ -43,7 +42,7 @@ const services = [
   },
   {
     id: 'orchestration',
-    icon: Workflow,
+    logo: airflowLogo,
     title: 'Workflow Orchestration',
     description: 'Automate and schedule your data workflows with confidence.',
     longDescription: 'We design and implement workflow orchestration that keeps your data pipelines running reliably. With Apache Airflow, we build DAGs that are easy to monitor, maintain, and scale.',
@@ -58,7 +57,7 @@ const services = [
   },
   {
     id: 'warehousing',
-    icon: Cloud,
+    logo: bigqueryLogo,
     title: 'Cloud Data Warehousing',
     description: 'Centralize your data in a scalable, secure cloud warehouse.',
     longDescription: 'We architect and optimize cloud data warehouses that scale with your business. Google BigQuery provides the foundation for analytics workloads with minimal operational overhead.',
@@ -73,7 +72,8 @@ const services = [
   },
   {
     id: 'analytics',
-    icon: BarChart3,
+    logo: lookerLogo,
+    logoScale: 'scale-125',
     title: 'Analytics & BI',
     description: 'Build dashboards and enable self-serve analytics across your organization.',
     longDescription: 'We implement business intelligence solutions that empower your teams to make data-driven decisions. With Looker, we create semantic models and dashboards that provide consistent, trustworthy metrics.',
@@ -133,8 +133,12 @@ const Services = () => {
                 }`}
               >
                 <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
-                  <div className="p-4 w-fit rounded-2xl gf-gradient-bg mb-6">
-                    <service.icon className="h-8 w-8 text-accent-foreground" />
+                  <div className="w-20 h-20 rounded-2xl bg-white flex items-center justify-center mb-6 shadow-lg overflow-hidden p-3">
+                    <img 
+                      src={service.logo} 
+                      alt={`${service.title} logo`} 
+                      className={`w-full h-full object-contain ${service.logoScale || ''}`}
+                    />
                   </div>
                   <h2 className="text-3xl font-bold text-foreground mb-4">
                     {service.title}
@@ -165,8 +169,12 @@ const Services = () => {
                 <div className={`${index % 2 === 1 ? 'lg:order-1' : ''}`}>
                   <div className="relative">
                     <div className="aspect-square rounded-2xl bg-gradient-to-br from-secondary to-muted p-8 flex items-center justify-center">
-                      <div className="w-full h-full rounded-xl border border-border bg-card shadow-xl flex items-center justify-center">
-                        <service.icon className="h-24 w-24 text-gf-teal/30" />
+                      <div className="w-full h-full rounded-xl border border-border bg-white shadow-xl flex items-center justify-center p-12">
+                        <img 
+                          src={service.logo} 
+                          alt={`${service.title} logo`} 
+                          className={`w-full h-full object-contain ${service.logoScale || ''}`}
+                        />
                       </div>
                     </div>
                     <div className="absolute -bottom-4 -right-4 p-4 rounded-xl bg-card shadow-lg border border-border">
