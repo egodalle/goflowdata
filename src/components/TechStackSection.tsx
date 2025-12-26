@@ -13,30 +13,35 @@ const techStack = [
     description: 'Open-source data integration platform for EL (Extract, Load) pipelines.',
     role: 'Data Extraction',
     logo: airbyteLogo,
+    scale: 'scale-100',
   },
   {
     name: 'dbt',
     description: 'Analytics engineering tool for transforming data in your warehouse.',
     role: 'Data Transformation',
     logo: dbtLogo,
+    scale: 'scale-100',
   },
   {
     name: 'Apache Airflow',
     description: 'Workflow orchestration platform for scheduling and monitoring pipelines.',
     role: 'Orchestration',
     logo: airflowLogo,
+    scale: 'scale-100',
   },
   {
     name: 'Google BigQuery',
     description: 'Serverless, highly scalable cloud data warehouse.',
     role: 'Data Warehouse',
     logo: bigqueryLogo,
+    scale: 'scale-100',
   },
   {
     name: 'Looker',
     description: 'Business intelligence and analytics platform with semantic modeling.',
     role: 'Analytics & BI',
     logo: lookerLogo,
+    scale: 'scale-125',
   },
 ];
 
@@ -78,7 +83,7 @@ export const TechStackSection = () => {
               >
                 <div className="gf-card gf-card-hover text-center h-full">
                   <div className="w-16 h-16 mx-auto rounded-2xl bg-white flex items-center justify-center mb-4 shadow-lg overflow-hidden p-2">
-                    <img src={tech.logo} alt={`${tech.name} logo`} className="w-full h-full object-contain" />
+                    <img src={tech.logo} alt={`${tech.name} logo`} className={`w-full h-full object-contain ${tech.scale}`} />
                   </div>
                   <span className="inline-block px-2 py-0.5 rounded bg-secondary text-secondary-foreground text-xs font-medium mb-2">
                     {tech.role}
