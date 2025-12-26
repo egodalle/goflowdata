@@ -1,36 +1,42 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
+import airbyteLogo from '@/assets/logos/airbyte-logo.png';
+import dbtLogo from '@/assets/logos/dbt-logo.png';
+import airflowLogo from '@/assets/logos/airflow-logo.png';
+import bigqueryLogo from '@/assets/logos/bigquery-logo.svg';
+import lookerLogo from '@/assets/logos/looker-logo.png';
+
 const techStack = [
   {
     name: 'Airbyte',
     description: 'Open-source data integration platform for EL (Extract, Load) pipelines.',
     role: 'Data Extraction',
-    color: 'from-blue-500 to-blue-600',
+    logo: airbyteLogo,
   },
   {
     name: 'dbt',
     description: 'Analytics engineering tool for transforming data in your warehouse.',
     role: 'Data Transformation',
-    color: 'from-orange-500 to-red-500',
+    logo: dbtLogo,
   },
   {
     name: 'Apache Airflow',
     description: 'Workflow orchestration platform for scheduling and monitoring pipelines.',
     role: 'Orchestration',
-    color: 'from-teal-500 to-cyan-500',
+    logo: airflowLogo,
   },
   {
     name: 'Google BigQuery',
     description: 'Serverless, highly scalable cloud data warehouse.',
     role: 'Data Warehouse',
-    color: 'from-blue-400 to-indigo-500',
+    logo: bigqueryLogo,
   },
   {
     name: 'Looker',
     description: 'Business intelligence and analytics platform with semantic modeling.',
     role: 'Analytics & BI',
-    color: 'from-purple-500 to-pink-500',
+    logo: lookerLogo,
   },
 ];
 
@@ -71,8 +77,8 @@ export const TechStackSection = () => {
                 className="relative"
               >
                 <div className="gf-card gf-card-hover text-center h-full">
-                  <div className={`w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br ${tech.color} flex items-center justify-center mb-4 shadow-lg`}>
-                    <span className="text-2xl font-bold text-white">{tech.name[0]}</span>
+                  <div className="w-16 h-16 mx-auto rounded-2xl bg-white flex items-center justify-center mb-4 shadow-lg overflow-hidden p-2">
+                    <img src={tech.logo} alt={`${tech.name} logo`} className="w-full h-full object-contain" />
                   </div>
                   <span className="inline-block px-2 py-0.5 rounded bg-secondary text-secondary-foreground text-xs font-medium mb-2">
                     {tech.role}
