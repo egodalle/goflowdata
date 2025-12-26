@@ -1,45 +1,45 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { 
-  Database, 
-  GitBranch, 
-  Workflow, 
-  Cloud, 
-  BarChart3,
-  ArrowRight 
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+
+import airbyteLogo from '@/assets/logos/airbyte-logo.png';
+import dbtLogo from '@/assets/logos/dbt-logo.png';
+import airflowLogo from '@/assets/logos/airflow-logo.png';
+import bigqueryLogo from '@/assets/logos/bigquery-logo.svg';
+import lookerLogo from '@/assets/logos/looker-logo.webp';
 
 const services = [
   {
-    icon: Database,
+    logo: airbyteLogo,
     title: 'Data Extraction & Ingestion',
     description: 'Connect to any data source with Airbyte, custom APIs, and purpose-built connectors. Reliable, scalable data extraction.',
     tools: ['Airbyte', 'REST APIs', 'Custom Connectors'],
   },
   {
-    icon: GitBranch,
+    logo: dbtLogo,
     title: 'Data Transformation & Modeling',
     description: 'Transform raw data into analytics-ready models with dbt. Version-controlled, tested, and documented.',
     tools: ['dbt', 'SQL', 'Data Modeling'],
   },
   {
-    icon: Workflow,
+    logo: airflowLogo,
     title: 'Workflow Orchestration',
     description: 'Automate and schedule your data workflows with Apache Airflow. Monitor, retry, and scale with confidence.',
     tools: ['Apache Airflow', 'DAGs', 'Scheduling'],
   },
   {
-    icon: Cloud,
+    logo: bigqueryLogo,
     title: 'Cloud Data Warehousing',
     description: 'Centralize your data in Google BigQuery. Scalable, secure, and optimized for analytics workloads.',
     tools: ['Google BigQuery', 'Data Warehouse', 'SQL'],
   },
   {
-    icon: BarChart3,
+    logo: lookerLogo,
     title: 'Analytics & BI',
     description: 'Build dashboards and semantic models with Looker. Self-serve analytics for your entire organization.',
     tools: ['Looker', 'Dashboards', 'Metrics'],
+    logoScale: 'scale-125',
   },
 ];
 
@@ -75,8 +75,12 @@ export const ServicesSection = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="gf-card gf-card-hover group"
             >
-              <div className="p-3 w-fit rounded-xl gf-gradient-bg mb-4 group-hover:shadow-lg transition-shadow">
-                <service.icon className="h-6 w-6 text-accent-foreground" />
+              <div className="w-16 h-16 rounded-xl bg-white flex items-center justify-center mb-4 shadow-lg overflow-hidden p-2 group-hover:shadow-xl transition-shadow">
+                <img 
+                  src={service.logo} 
+                  alt={`${service.title} logo`} 
+                  className={`w-full h-full object-contain ${service.logoScale || ''}`} 
+                />
               </div>
               <h3 className="text-xl font-semibold text-foreground mb-2">
                 {service.title}
