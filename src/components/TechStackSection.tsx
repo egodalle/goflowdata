@@ -5,7 +5,7 @@ import airbyteLogo from '@/assets/logos/airbyte-logo.png';
 import dbtLogo from '@/assets/logos/dbt-logo.png';
 import airflowLogo from '@/assets/logos/airflow-logo.png';
 import bigqueryLogo from '@/assets/logos/bigquery-logo.svg';
-import lookerLogo from '@/assets/logos/looker-logo.png';
+import lookerLogo from '@/assets/logos/looker-logo.webp';
 
 const techStack = [
   {
