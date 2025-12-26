@@ -55,7 +55,7 @@ export const Footer = () => {
                 <Twitter className="h-5 w-5" />
               </a>
               <a
-                href="mailto:hello@goflow.dev"
+                href="mailto:hello@goflowdata.com"
                 className="p-2 rounded-lg bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-colors"
                 aria-label="Email"
               >

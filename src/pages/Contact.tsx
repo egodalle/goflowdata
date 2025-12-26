@@ -129,8 +129,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">Email</h3>
-                    <a href="mailto:hello@goflow.dev" className="text-muted-foreground hover:text-gf-teal transition-colors">
-                      hello@goflow.dev
+                    <a href="mailto:hello@goflowdata.com" className="text-muted-foreground hover:text-gf-teal transition-colors">
+                      hello@goflowdata.com
                     </a>
                   </div>
                 </div>
