@@ -43,7 +43,7 @@ export const Hero = () => {
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight mb-6">
               Modern Data Pipelines{' '}
-              <span className="gf-gradient-text">Built for Scale</span>
+              <span className="gf-gradient-text">Built for Growing Tech & Data-Driven Companies</span>
             </h1>
             
             <p className="text-lg md:text-xl text-primary-foreground/70 mb-8 max-w-xl">
