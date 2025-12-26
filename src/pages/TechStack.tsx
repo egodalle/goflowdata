@@ -4,10 +4,17 @@ import { CTASection } from '@/components/CTASection';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 
+import airbyteLogo from '@/assets/logos/airbyte-logo.png';
+import dbtLogo from '@/assets/logos/dbt-logo.png';
+import airflowLogo from '@/assets/logos/airflow-logo.png';
+import bigqueryLogo from '@/assets/logos/bigquery-logo.svg';
+import lookerLogo from '@/assets/logos/looker-logo.webp';
+
 const techStack = [
   {
     id: 'airbyte',
     name: 'Airbyte',
+    logo: airbyteLogo,
     tagline: 'Data Integration Platform',
     description: 'Open-source data integration platform that syncs data from applications, APIs, and databases to warehouses.',
     role: 'Extract & Load',
@@ -31,6 +38,7 @@ const techStack = [
   {
     id: 'dbt',
     name: 'dbt',
+    logo: dbtLogo,
     tagline: 'Analytics Engineering',
     description: 'The standard for transforming data in your warehouse. Write modular SQL, test your data, and document everything.',
     role: 'Transform',
@@ -54,6 +62,7 @@ const techStack = [
   {
     id: 'airflow',
     name: 'Apache Airflow',
+    logo: airflowLogo,
     tagline: 'Workflow Orchestration',
     description: 'Platform to programmatically author, schedule, and monitor workflows. The industry standard for data pipeline orchestration.',
     role: 'Orchestrate',
@@ -77,6 +86,7 @@ const techStack = [
   {
     id: 'bigquery',
     name: 'Google BigQuery',
+    logo: bigqueryLogo,
     tagline: 'Cloud Data Warehouse',
     description: 'Serverless, highly scalable, and cost-effective multi-cloud data warehouse designed for business agility.',
     role: 'Store & Query',
@@ -100,6 +110,8 @@ const techStack = [
   {
     id: 'looker',
     name: 'Looker',
+    logo: lookerLogo,
+    logoScale: 'scale-125',
     tagline: 'Business Intelligence',
     description: 'Modern BI platform with semantic modeling that enables self-serve analytics and consistent metrics across the organization.',
     role: 'Analyze & Visualize',
@@ -193,8 +205,12 @@ const TechStack = () => {
                 }`}>
                   <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
                     <div className="flex items-center gap-4 mb-6">
-                      <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${tech.color} flex items-center justify-center shadow-lg`}>
-                        <span className="text-2xl font-bold text-white">{tech.name[0]}</span>
+                      <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center shadow-lg overflow-hidden p-2">
+                        <img 
+                          src={tech.logo} 
+                          alt={`${tech.name} logo`} 
+                          className={`w-full h-full object-contain ${tech.logoScale || ''}`}
+                        />
                       </div>
                       <div>
                         <span className="text-sm font-medium text-muted-foreground">{tech.role}</span>
@@ -244,8 +260,12 @@ const TechStack = () => {
 
                   <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
                     <div className={`rounded-2xl ${tech.bgColor} p-8 aspect-video flex items-center justify-center`}>
-                      <div className={`w-32 h-32 rounded-3xl bg-gradient-to-br ${tech.color} flex items-center justify-center shadow-2xl`}>
-                        <span className="text-5xl font-bold text-white">{tech.name[0]}</span>
+                      <div className="w-40 h-40 rounded-3xl bg-white flex items-center justify-center shadow-2xl overflow-hidden p-6">
+                        <img 
+                          src={tech.logo} 
+                          alt={`${tech.name} logo`} 
+                          className={`w-full h-full object-contain ${tech.logoScale || ''}`}
+                        />
                       </div>
                     </div>
                   </div>
