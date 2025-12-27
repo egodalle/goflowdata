@@ -66,13 +66,50 @@ export const ServicesSection = () => {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => (
+          {services.slice(0, 3).map((service, index) => (
             <motion.div
               key={service.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="gf-card gf-card-hover group"
+            >
+              <div className="w-16 h-16 rounded-xl bg-white flex items-center justify-center mb-4 shadow-lg overflow-hidden p-2 group-hover:shadow-xl transition-shadow">
+                <img 
+                  src={service.logo} 
+                  alt={`${service.title} logo`} 
+                  className={`w-full h-full object-contain ${service.logoScale || ''}`} 
+                />
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-2">
+                {service.title}
+              </h3>
+              <p className="text-muted-foreground mb-4">
+                {service.description}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {service.tools.map((tool) => (
+                  <span
+                    key={tool}
+                    className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium"
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+        
+        <div className="grid md:grid-cols-2 gap-6 mt-6 lg:max-w-[66.666%] lg:mx-auto">
+          {services.slice(3).map((service, index) => (
+            <motion.div
+              key={service.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: (index + 3) * 0.1 }}
               className="gf-card gf-card-hover group"
             >
               <div className="w-16 h-16 rounded-xl bg-white flex items-center justify-center mb-4 shadow-lg overflow-hidden p-2 group-hover:shadow-xl transition-shadow">
