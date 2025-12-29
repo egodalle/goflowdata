@@ -1,7 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Resend } from "https://esm.sh/resend@2.0.0";
 
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
+const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY");
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -27,43 +26,50 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Received contact form submission:", { name, email, company });
 
-    // Send notification email to GoFlow Data
-    // Using Resend's test domain until goflowdata.com is verified
-    const notificationResponse = await resend.emails.send({
-      from: "GoFlow Data <onboarding@resend.dev>",
-      to: ["hello@goflowdata.com"],
-      subject: `New Contact Form Submission from ${name}`,
-      html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Company:</strong> ${company || 'Not provided'}</p>
-        <hr />
-        <h3>Message:</h3>
-        <p>${message.replace(/\n/g, '<br />')}</p>
-        <hr />
-        <p style="color: #666; font-size: 12px;">This email was sent from the GoFlow Data contact form.</p>
-      `,
+    // Send notification email to GoFlow Data using SendGrid
+    const sendGridResponse = await fetch("https://api.sendgrid.com/v3/mail/send", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${SENDGRID_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        personalizations: [
+          {
+            to: [{ email: "hello@goflowdata.com" }],
+            subject: `New Contact Form Submission from ${name}`,
+          },
+        ],
+        from: { email: "hello@goflowdata.com", name: "GoFlow Data" },
+        content: [
+          {
+            type: "text/html",
+            value: `
+              <h2>New Contact Form Submission</h2>
+              <p><strong>Name:</strong> ${name}</p>
+              <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Company:</strong> ${company || 'Not provided'}</p>
+              <hr />
+              <h3>Message:</h3>
+              <p>${message.replace(/\n/g, '<br />')}</p>
+              <hr />
+              <p style="color: #666; font-size: 12px;">This email was sent from the GoFlow Data contact form.</p>
+            `,
+          },
+        ],
+      }),
     });
 
-    console.log("Notification email sent:", notificationResponse);
+    if (!sendGridResponse.ok) {
+      const errorText = await sendGridResponse.text();
+      console.error("SendGrid error:", sendGridResponse.status, errorText);
+      throw new Error(`SendGrid API error: ${sendGridResponse.status}`);
+    }
 
-    // Note: Confirmation emails to users only work with verified domain
-    // Skipping user confirmation email until domain is verified
-    console.log("Skipping confirmation email - domain not yet verified");
-
-    // Once domain is verified, uncomment this:
-    // const confirmationResponse = await resend.emails.send({
-    //   from: "GoFlow Data <hello@goflowdata.com>",
-    //   to: [email],
-    //   subject: "Thank you for contacting GoFlow Data",
-    //   html: `...`,
-    // });
-
-    
+    console.log("Notification email sent successfully via SendGrid");
 
     return new Response(
-      JSON.stringify({ success: true, message: "Emails sent successfully" }),
+      JSON.stringify({ success: true, message: "Email sent successfully" }),
       {
         status: 200,
         headers: { "Content-Type": "application/json", ...corsHeaders },
