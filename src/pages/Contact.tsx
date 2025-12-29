@@ -6,8 +6,9 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Mail, Phone, MapPin, Send, Calendar } from 'lucide-react';
+import { Mail, MapPin, Send, Calendar } from 'lucide-react';
 import { z } from 'zod';
+import { supabase } from '@/integrations/supabase/client';
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, 'Name is required').max(100, 'Name must be less than 100 characters'),
@@ -44,8 +45,14 @@ const Contact = () => {
     try {
       const validatedData = contactSchema.parse(formData);
       
-      // Simulate form submission
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Send email via edge function
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: validatedData,
+      });
+
+      if (error) {
+        throw error;
+      }
       
       toast({
         title: 'Message sent!',
@@ -63,6 +70,7 @@ const Contact = () => {
         });
         setErrors(fieldErrors);
       } else {
+        console.error('Error sending contact form:', error);
         toast({
           title: 'Error',
           description: 'Something went wrong. Please try again.',
