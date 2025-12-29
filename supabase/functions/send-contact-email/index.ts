@@ -28,8 +28,9 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("Received contact form submission:", { name, email, company });
 
     // Send notification email to GoFlow Data
+    // Using Resend's test domain until goflowdata.com is verified
     const notificationResponse = await resend.emails.send({
-      from: "GoFlow Data <hello@goflowdata.com>",
+      from: "GoFlow Data <onboarding@resend.dev>",
       to: ["hello@goflowdata.com"],
       subject: `New Contact Form Submission from ${name}`,
       html: `
@@ -47,23 +48,19 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Notification email sent:", notificationResponse);
 
-    // Send confirmation email to the user
-    const confirmationResponse = await resend.emails.send({
-      from: "GoFlow Data <hello@goflowdata.com>",
-      to: [email],
-      subject: "Thank you for contacting GoFlow Data",
-      html: `
-        <h2>Thank you for reaching out, ${name}!</h2>
-        <p>We've received your message and will get back to you within 24 hours.</p>
-        <p>In the meantime, here's a copy of your message:</p>
-        <blockquote style="padding: 10px 20px; background: #f5f5f5; border-left: 4px solid #00B4D8;">
-          ${message.replace(/\n/g, '<br />')}
-        </blockquote>
-        <p>Best regards,<br />The GoFlow Data Team</p>
-      `,
-    });
+    // Note: Confirmation emails to users only work with verified domain
+    // Skipping user confirmation email until domain is verified
+    console.log("Skipping confirmation email - domain not yet verified");
 
-    console.log("Confirmation email sent:", confirmationResponse);
+    // Once domain is verified, uncomment this:
+    // const confirmationResponse = await resend.emails.send({
+    //   from: "GoFlow Data <hello@goflowdata.com>",
+    //   to: [email],
+    //   subject: "Thank you for contacting GoFlow Data",
+    //   html: `...`,
+    // });
+
+    
 
     return new Response(
       JSON.stringify({ success: true, message: "Emails sent successfully" }),
