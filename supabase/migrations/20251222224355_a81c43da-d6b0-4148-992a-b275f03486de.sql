@@ -91,3 +91,16 @@ CREATE TRIGGER update_datapulse_profiles_updated_at
 CREATE TRIGGER update_datapulse_stores_updated_at
   BEFORE UPDATE ON public.datapulse_stores
   FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+
+-- Contact form submissions (always saved, even if outbound email is not configured)
+CREATE TABLE public.contact_submissions (
+  id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  company TEXT,
+  message TEXT NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+);
+
+ALTER TABLE public.contact_submissions ENABLE ROW LEVEL SECURITY;
+-- No public policies: the send-contact-email edge function uses the service role.
