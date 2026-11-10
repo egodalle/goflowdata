@@ -85,10 +85,10 @@ const Projects = () => {
               Case Studies
             </span>
             <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
-              Real Results Across Industries
+              Selected Project Experience
             </h1>
             <p className="text-xl text-primary-foreground/70">
-              Explore how we've helped companies transform their data infrastructure and achieve measurable business outcomes.
+              Selected, generalized examples of data engineering work across different business contexts. Specific client identities and confidential details are omitted.
             </p>
           </motion.div>
         </div>
@@ -154,7 +154,7 @@ const Projects = () => {
                   {/* Right Column - Outcomes */}
                   <div className="lg:pl-8 lg:border-l lg:border-border">
                     <h3 className="text-sm font-semibold text-gf-teal uppercase tracking-wide mb-4">
-                      Business Outcomes
+                      What the solution enabled
                     </h3>
                     <ul className="space-y-3">
                       {project.outcomes.map((outcome) => (
