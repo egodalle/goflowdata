@@ -53,10 +53,10 @@ export const ProjectsSection = () => {
             Case Studies
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Real Results Across Industries
+            Selected Project Experience
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            See how we've helped companies transform their data infrastructure.
+            Explore representative examples of data platforms, integrations, and analytics solutions. Project details are generalized to protect client confidentiality.
           </p>
         </motion.div>
 
