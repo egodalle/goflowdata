@@ -100,10 +100,10 @@ const Contact = () => {
               Contact Us
             </span>
             <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
-              Let's Build Your Data Pipeline
+              Let's Talk About Your Business Goals
             </h1>
             <p className="text-xl text-primary-foreground/70">
-              Ready to transform your data infrastructure? Get in touch and we'll respond within 24 hours.
+              Tell us what you're trying to improve. Share a little about your systems, workflow, or data challenge and we'll follow up.
             </p>
           </motion.div>
         </div>
@@ -150,7 +150,7 @@ const Contact = () => {
                   <div>
                     <h3 className="font-semibold text-foreground">Schedule a Call</h3>
                     <p className="text-muted-foreground">
-                      Book a 30-minute consultation to discuss your data challenges.
+                      Email us to arrange a discovery conversation about your project.
                     </p>
                   </div>
                 </div>
