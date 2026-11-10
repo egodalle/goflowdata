@@ -2,182 +2,69 @@ import { motion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
 import { CTASection } from '@/components/CTASection';
 import { Target, Users, Zap, Shield } from 'lucide-react';
+import aboutCollaboration from '@/assets/images/about-collaboration.jpg';
 
 const values = [
-  {
-    icon: Target,
-    title: 'Results-Focused',
-    description: 'We measure success by the business outcomes we deliver, not the code we write.',
-  },
-  {
-    icon: Users,
-    title: 'Collaborative',
-    description: 'We work as an extension of your team, sharing knowledge and building internal capabilities.',
-  },
-  {
-    icon: Zap,
-    title: 'Pragmatic',
-    description: 'We choose the right tool for the job, not the trendiest. Simple solutions that work.',
-  },
-  {
-    icon: Shield,
-    title: 'Reliable',
-    description: 'We build systems designed for production. 99.9% uptime is our baseline, not our goal.',
-  },
+  { icon: Target, title: 'Business-first', description: 'We start with the business problem and define what a useful outcome looks like before choosing technology.' },
+  { icon: Users, title: 'Collaborative', description: 'We work alongside your people, communicate clearly, and share knowledge throughout the engagement.' },
+  { icon: Zap, title: 'Pragmatic', description: 'We select tools and architectures to fit your needs, budget, and existing environment—not technology for its own sake.' },
+  { icon: Shield, title: 'Built for ownership', description: 'We value maintainable systems, clear documentation, sensible controls, and solutions your team can operate.' },
 ];
 
-const About = () => {
-  return (
-    <Layout>
-      {/* Header */}
-      <section className="gf-section bg-gf-navy relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-10 left-1/3 w-72 h-72 bg-gf-teal rounded-full blur-[100px]" />
+const About = () => (
+  <Layout>
+    <section className="gf-page-hero">
+      <div className="absolute inset-0">
+        <img src={aboutCollaboration} alt="" className="h-full w-full object-cover opacity-25" />
+        <div className="absolute inset-0 bg-gf-navy/75" />
+        <div className="absolute left-1/3 top-10 h-72 w-72 rounded-full bg-gf-teal/40 blur-[110px]" />
+      </div>
+      <div className="gf-container relative z-10">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="max-w-3xl">
+          <span className="gf-eyebrow mb-6">About GoFlow Data</span>
+          <h1 className="mb-6 text-4xl font-semibold tracking-tight text-primary-foreground md:text-5xl">Engineering that makes business data useful.</h1>
+          <p className="text-xl leading-relaxed text-primary-foreground/70">We help growing businesses connect their systems, trust their information, and put data and AI to work on real operational challenges.</p>
+        </motion.div>
+      </div>
+    </section>
+    <section className="gf-section bg-background">
+      <div className="gf-container grid items-center gap-12 lg:grid-cols-2">
+        <div className="overflow-hidden rounded-3xl border border-border">
+          <img
+            src={aboutCollaboration}
+            alt="Engineers collaborating around a data platform"
+            className="h-full w-full object-cover lg:min-h-[420px]"
+          />
         </div>
-        <div className="gf-container relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-3xl"
-          >
-            <span className="inline-block px-4 py-1 rounded-full bg-gf-teal/10 text-gf-teal text-sm font-medium mb-4">
-              About GoFlow
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
-              Building Data Infrastructure That Scales
-            </h1>
-            <p className="text-xl text-primary-foreground/70">
-              We're a team of data engineers who believe that reliable data infrastructure is the foundation of every successful analytics and AI initiative.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Mission */}
-      <section className="gf-section bg-background">
-        <div className="gf-container">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Our Mission
-              </h2>
-              <div className="space-y-4 text-lg text-muted-foreground">
-                <p>
-                  GoFlow was founded with a simple belief: <span className="text-foreground font-medium">every company deserves data infrastructure that just works.</span>
-                </p>
-                <p>
-                  Too many organizations struggle with fragmented data, manual processes, and unreliable pipelines. They can't trust their numbers, can't move fast, and can't compete with data-native companies.
-                </p>
-                <p>
-                  We change that. We design, build, and optimize end-to-end data pipelines that transform raw data into trusted analytics and AI-ready platforms. Our clients don't just get better data—they get a competitive advantage.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-secondary to-muted p-1">
-                <div className="h-full w-full rounded-xl bg-card flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <div className="text-6xl font-bold gf-gradient-text mb-4">50+</div>
-                    <div className="text-xl text-foreground font-medium mb-2">Pipelines Delivered</div>
-                    <div className="text-muted-foreground">Across 4+ industries</div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Values */}
-      <section className="gf-section bg-secondary/30">
-        <div className="gf-container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              How We Work
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Our values guide every project and every decision we make.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value, index) => (
-              <motion.div
-                key={value.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="gf-card text-center"
-              >
-                <div className="p-4 w-fit mx-auto rounded-2xl gf-gradient-bg mb-4">
-                  <value.icon className="h-8 w-8 text-accent-foreground" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">
-                  {value.title}
-                </h3>
-                <p className="text-muted-foreground">
-                  {value.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Approach */}
-      <section className="gf-section bg-background">
-        <div className="gf-container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="max-w-3xl mx-auto text-center"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-              Our Approach
-            </h2>
-            <div className="space-y-6 text-lg text-muted-foreground text-left">
-              <p>
-                We don't believe in one-size-fits-all solutions. Every engagement starts with understanding your unique data challenges, business goals, and technical constraints.
-              </p>
-              <p>
-                We then design a pragmatic solution using proven technologies—Airbyte, dbt, Airflow, BigQuery, and Looker—that fits your scale, budget, and timeline.
-              </p>
-              <p>
-                Most importantly, we build systems that your team can own. We document everything, train your staff, and ensure you're never locked into a black box.
-              </p>
+        <div className="space-y-8">
+          <div>
+            <h2 className="mb-6 text-3xl font-bold text-foreground md:text-4xl">Our mission</h2>
+            <div className="space-y-4 text-lg leading-relaxed text-muted-foreground">
+              <p><strong className="text-foreground">Make good data and useful automation accessible to growing businesses.</strong></p>
+              <p>Many teams are held back by disconnected applications, manual reporting, inconsistent metrics, and processes that do not scale. Adding another tool rarely solves the underlying problem.</p>
+              <p>GoFlow takes an end-to-end view: understand the workflow, connect the right systems, establish reliable data, and introduce automation or AI where it creates practical value.</p>
             </div>
-          </motion.div>
+          </div>
+          <div className="rounded-3xl border border-border bg-secondary/40 p-8 md:p-10">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gf-teal">Our focus</p>
+            <h3 className="mb-6 text-2xl font-bold text-foreground">A clear path from complexity to clarity.</h3>
+            <ol className="space-y-5">
+              {['Understand your goals and current systems', 'Design a solution that fits your business', 'Build, test, document, and integrate', 'Support adoption and continuous improvement'].map((step, i) => <li key={step} className="flex items-start gap-4"><span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gf-teal/15 text-sm font-bold text-gf-teal">{i + 1}</span><span className="pt-1 text-foreground/80">{step}</span></li>)}
+            </ol>
+          </div>
         </div>
-      </section>
-
-      <CTASection
-        title="Let's Build Something Great Together"
-        description="Ready to transform your data infrastructure? We'd love to hear about your challenges."
-      />
-    </Layout>
-  );
-};
+      </div>
+    </section>
+    <section className="gf-section bg-secondary/30">
+      <div className="gf-container">
+        <div className="mx-auto mb-12 max-w-2xl text-center"><h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">How we work</h2><p className="text-lg text-muted-foreground">A thoughtful engineering partner, focused on outcomes and long-term usefulness.</p></div>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {values.map(({ icon: Icon, title, description }, i) => <motion.div key={title} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .4, delay: i * .08 }} className="gf-card"><div className="mb-4 inline-flex rounded-xl bg-gf-teal/10 p-3 text-gf-teal"><Icon className="h-6 w-6" /></div><h3 className="mb-2 text-lg font-semibold text-foreground">{title}</h3><p className="text-sm leading-relaxed text-muted-foreground">{description}</p></motion.div>)}
+        </div>
+      </div>
+    </section>
+    <CTASection title="Let's solve the right problem." description="Share what your team is trying to achieve. We’ll help you explore a practical way forward." primaryCTA="Start a conversation" />
+  </Layout>
+);
 
 export default About;

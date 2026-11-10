@@ -1,199 +1,97 @@
 import { motion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
 import { CTASection } from '@/components/CTASection';
-import { CheckCircle2 } from 'lucide-react';
-
-import airbyteLogo from '@/assets/logos/airbyte-logo.png';
-import dbtLogo from '@/assets/logos/dbt-logo.png';
-import airflowLogo from '@/assets/logos/airflow-logo.png';
-import bigqueryLogo from '@/assets/logos/bigquery-logo.svg';
-import lookerLogo from '@/assets/logos/looker-logo.webp';
+import { Database, BrainCircuit, ShoppingCart, CheckCircle2 } from 'lucide-react';
+import serviceData from '@/assets/images/service-data.jpg';
+import serviceAi from '@/assets/images/service-ai.jpg';
+import serviceCommerce from '@/assets/images/service-commerce.jpg';
 
 const services = [
   {
-    id: 'extraction',
-    logo: airbyteLogo,
-    title: 'Data Extraction & Ingestion',
-    description: 'Connect to any data source with reliable, scalable extraction pipelines.',
-    longDescription: 'We build robust data extraction pipelines that connect to your entire data ecosystem. From SaaS applications and databases to APIs and flat files, we ensure every data source is captured and centralized.',
-    features: [
-      'Airbyte for 300+ pre-built connectors',
-      'Custom API integrations',
-      'Real-time and batch ingestion',
-      'Schema change detection',
-      'Data validation at source',
-    ],
-    tools: ['Airbyte', 'REST APIs', 'Custom Connectors', 'Fivetran'],
+    id: 'data-platforms',
+    icon: Database,
+    number: '01',
+    title: 'Data Engineering & Cloud Platforms',
+    intro: 'A dependable data foundation for reporting, operations, and AI.',
+    description: 'Connect your business systems, automate data movement, and turn fragmented information into trusted, well-modeled datasets your team can use.',
+    deliverables: ['ETL/ELT pipelines and API integrations', 'BigQuery, Snowflake and cloud warehouse architecture', 'dbt transformations, testing and documentation', 'Airflow orchestration, monitoring and alerting', 'Data quality, governance and cost optimization'],
+    tools: ['Python', 'SQL', 'Airbyte', 'dbt', 'Airflow', 'BigQuery', 'Snowflake'],
+    image: serviceData,
+    imageAlt: 'Cloud data platform with connected pipelines',
   },
   {
-    id: 'transformation',
-    logo: dbtLogo,
-    title: 'Data Transformation & Modeling',
-    description: 'Transform raw data into analytics-ready models with best practices.',
-    longDescription: 'We apply analytics engineering principles to transform your raw data into clean, tested, and documented data models. Using dbt, we create a single source of truth that your entire organization can rely on.',
-    features: [
-      'Modular SQL transformations',
-      'Automated testing and documentation',
-      'Version control with Git',
-      'Incremental processing',
-      'Data quality checks',
-    ],
-    tools: ['dbt', 'SQL', 'Git', 'Great Expectations'],
+    id: 'ai-automation',
+    icon: BrainCircuit,
+    number: '02',
+    title: 'AI & Intelligent Automation',
+    intro: 'Practical AI that helps your team move faster.',
+    description: 'Turn repetitive workflows and scattered business knowledge into useful AI-powered processes, with clear controls and human review where it matters.',
+    deliverables: ['LLM-powered assistants and task-focused AI agents', 'Retrieval-augmented generation (RAG)', 'Intelligent document extraction and classification', 'Workflow automation and system integrations', 'Human approval, audit trails and operational monitoring'],
+    tools: ['Python', 'LLMs', 'RAG', 'Vector search', 'FastAPI', 'Workflow automation'],
+    image: serviceAi,
+    imageAlt: 'Documents flowing into an AI automation network',
   },
   {
-    id: 'orchestration',
-    logo: airflowLogo,
-    title: 'Workflow Orchestration',
-    description: 'Automate and schedule your data workflows with confidence.',
-    longDescription: 'We design and implement workflow orchestration that keeps your data pipelines running reliably. With Apache Airflow, we build DAGs that are easy to monitor, maintain, and scale.',
-    features: [
-      'Apache Airflow DAGs',
-      'Dependency management',
-      'Automated retries and alerts',
-      'Parallel processing',
-      'Comprehensive logging',
-    ],
-    tools: ['Apache Airflow', 'Dagster', 'Prefect', 'Cloud Composer'],
-  },
-  {
-    id: 'warehousing',
-    logo: bigqueryLogo,
-    title: 'Cloud Data Warehousing',
-    description: 'Centralize your data in a scalable, secure cloud warehouse.',
-    longDescription: 'We architect and optimize cloud data warehouses that scale with your business. Google BigQuery provides the foundation for analytics workloads with minimal operational overhead.',
-    features: [
-      'Schema design and optimization',
-      'Partitioning and clustering',
-      'Cost optimization',
-      'Access control and security',
-      'Cross-cloud connectivity',
-    ],
-    tools: ['Google BigQuery', 'Snowflake', 'Redshift', 'Databricks'],
-  },
-  {
-    id: 'analytics',
-    logo: lookerLogo,
-    logoScale: 'scale-125',
-    title: 'Analytics & BI',
-    description: 'Build dashboards and enable self-serve analytics across your organization.',
-    longDescription: 'We implement business intelligence solutions that empower your teams to make data-driven decisions. With Looker, we create semantic models and dashboards that provide consistent, trustworthy metrics.',
-    features: [
-      'Semantic modeling (LookML)',
-      'Interactive dashboards',
-      'Scheduled reports',
-      'Embedded analytics',
-      'Self-serve exploration',
-    ],
-    tools: ['Looker', 'Tableau', 'Power BI', 'Metabase'],
+    id: 'ecommerce',
+    icon: ShoppingCart,
+    number: '03',
+    title: 'E-commerce Data Solutions',
+    intro: 'A clearer picture of performance across every channel.',
+    description: 'Bring commerce, marketplace, advertising, and inventory data together so you can understand sales performance and make decisions with consistent numbers.',
+    deliverables: ['Shopify, Amazon and marketplace data integrations', 'Multi-channel sales and product analytics', 'Inventory and order performance reporting', 'Marketing and campaign performance analysis', 'Automated dashboards and executive reporting'],
+    tools: ['Shopify', 'Amazon', 'REST APIs', 'BigQuery', 'dbt', 'Looker Studio'],
+    image: serviceCommerce,
+    imageAlt: 'Fulfillment operations with commerce analytics overlay',
   },
 ];
 
-const Services = () => {
-  return (
-    <Layout>
-      {/* Header */}
-      <section className="gf-section bg-gf-navy relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-10 right-10 w-72 h-72 bg-gf-teal rounded-full blur-[100px]" />
-        </div>
-        <div className="gf-container relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-3xl"
-          >
-            <span className="inline-block px-4 py-1 rounded-full bg-gf-teal/10 text-gf-teal text-sm font-medium mb-4">
-              Our Services
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
-              End-to-End Data Engineering Solutions
-            </h1>
-            <p className="text-xl text-primary-foreground/70">
-              From data extraction to analytics, we design, build, and optimize every component of your modern data stack.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Services List */}
-      <section className="gf-section bg-background">
-        <div className="gf-container">
-          <div className="space-y-16">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.id}
-                id={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className={`grid lg:grid-cols-2 gap-12 items-center ${
-                  index % 2 === 1 ? 'lg:flex-row-reverse' : ''
-                }`}
-              >
-                <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
-                  <div className="w-20 h-20 rounded-2xl bg-white flex items-center justify-center mb-6 shadow-lg overflow-hidden p-3">
-                    <img 
-                      src={service.logo} 
-                      alt={`${service.title} logo`} 
-                      className={`w-full h-full object-contain ${service.logoScale || ''}`}
-                    />
-                  </div>
-                  <h2 className="text-3xl font-bold text-foreground mb-4">
-                    {service.title}
-                  </h2>
-                  <p className="text-lg text-muted-foreground mb-6">
-                    {service.longDescription}
-                  </p>
-                  <ul className="space-y-3 mb-6">
-                    {service.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-3">
-                        <CheckCircle2 className="h-5 w-5 text-gf-teal flex-shrink-0 mt-0.5" />
-                        <span className="text-foreground">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="flex flex-wrap gap-2">
-                    {service.tools.map((tool) => (
-                      <span
-                        key={tool}
-                        className="px-3 py-1.5 rounded-full bg-secondary text-secondary-foreground text-sm font-medium"
-                      >
-                        {tool}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className={`${index % 2 === 1 ? 'lg:order-1' : ''}`}>
-                  <div className="relative">
-                    <div className="aspect-square rounded-2xl bg-gradient-to-br from-secondary to-muted p-8 flex items-center justify-center">
-                      <div className="w-full h-full rounded-xl border border-border bg-white shadow-xl flex items-center justify-center p-12">
-                        <img 
-                          src={service.logo} 
-                          alt={`${service.title} logo`} 
-                          className={`w-full h-full object-contain ${service.logoScale || ''}`}
-                        />
-                      </div>
-                    </div>
-                    <div className="absolute -bottom-4 -right-4 p-4 rounded-xl bg-card shadow-lg border border-border">
-                      <span className="text-sm font-medium text-foreground">{service.tools[0]}</span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <CTASection
-        title="Need a Custom Solution?"
-        description="Every business has unique data challenges. Let's discuss how we can tailor our services to meet your specific needs."
-      />
-    </Layout>
-  );
-};
+const Services = () => (
+  <Layout>
+    <section className="gf-page-hero">
+      <div className="absolute inset-0">
+        <img src={serviceData} alt="" className="h-full w-full object-cover opacity-25" />
+        <div className="absolute inset-0 bg-gf-navy/75" />
+        <div className="absolute right-10 top-10 h-72 w-72 rounded-full bg-gf-teal/40 blur-[110px]" />
+      </div>
+      <div className="gf-container relative z-10">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="max-w-3xl">
+          <span className="gf-eyebrow mb-6">Services</span>
+          <h1 className="mb-6 text-4xl font-semibold tracking-tight text-primary-foreground md:text-5xl">Build a smarter, more connected business.</h1>
+          <p className="text-xl leading-relaxed text-primary-foreground/70">From your data foundation to AI-enabled workflows and e-commerce intelligence, we deliver practical solutions shaped around your goals.</p>
+        </motion.div>
+      </div>
+    </section>
+    <section className="gf-section bg-background">
+      <div className="gf-container space-y-8">
+        {services.map(({ id, icon: Icon, number, title, intro, description, deliverables, tools, image, imageAlt }) => (
+          <motion.article id={id} key={id} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45 }} className="gf-card overflow-hidden p-0">
+            <div className="h-48 overflow-hidden md:h-56">
+              <img src={image} alt={imageAlt} className="h-full w-full object-cover" />
+            </div>
+            <div className="grid gap-8 p-6 md:p-8 lg:grid-cols-[.85fr_1.15fr] lg:gap-14">
+            <div>
+              <div className="mb-6 flex items-center justify-between">
+                <div className="rounded-2xl bg-gf-teal/10 p-4 text-gf-teal"><Icon className="h-8 w-8" /></div>
+                <span className="text-sm font-semibold tracking-widest text-muted-foreground/60">{number}</span>
+              </div>
+              <h2 className="mb-3 text-2xl font-bold text-foreground md:text-3xl">{title}</h2>
+              <p className="mb-3 text-lg font-medium text-gf-teal">{intro}</p>
+              <p className="leading-relaxed text-muted-foreground">{description}</p>
+            </div>
+            <div>
+              <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-foreground">What we can deliver</h3>
+              <ul className="mb-7 grid gap-3 sm:grid-cols-2">
+                {deliverables.map(item => <li key={item} className="flex gap-2 text-sm text-foreground/80"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gf-teal" />{item}</li>)}
+              </ul>
+              <div className="flex flex-wrap gap-2">{tools.map(tool => <span key={tool} className="rounded-full bg-secondary px-3 py-1.5 text-xs font-medium text-secondary-foreground">{tool}</span>)}</div>
+            </div>
+            </div>
+          </motion.article>
+        ))}
+      </div>
+    </section>
+    <CTASection title="Not sure where to start?" description="Tell us what you are trying to improve. We can help shape a practical first step, whether that is a focused integration, a data platform project, or an AI workflow." primaryCTA="Discuss your project" />
+  </Layout>
+);
 
 export default Services;

@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -16,17 +16,17 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         // GoFlow custom variants
-        accent: "bg-gf-teal text-accent-foreground hover:bg-gf-teal-light shadow-md hover:shadow-lg",
-        "accent-outline": "border-2 border-gf-teal text-gf-teal hover:bg-gf-teal hover:text-accent-foreground",
-        hero: "bg-gf-teal text-accent-foreground hover:bg-gf-teal-light shadow-lg hover:shadow-xl hover:-translate-y-0.5 font-semibold",
-        "hero-outline": "border-2 border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 font-semibold",
-        navy: "bg-gf-navy text-primary-foreground hover:bg-gf-navy-light shadow-md hover:shadow-lg",
+        accent: "bg-gf-teal text-accent-foreground hover:bg-gf-teal-light",
+        "accent-outline": "border border-gf-teal text-gf-teal hover:bg-gf-teal hover:text-accent-foreground",
+        hero: "bg-gf-teal text-slate-950 hover:bg-gf-teal-light font-semibold",
+        "hero-outline": "border border-white/15 bg-white/5 text-primary-foreground hover:bg-white/10 font-medium",
+        navy: "bg-gf-navy text-primary-foreground hover:bg-gf-navy-light",
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-12 rounded-lg px-8 text-base",
-        xl: "h-14 rounded-lg px-10 text-lg",
+        default: "h-10 px-5 py-2",
+        sm: "h-9 px-3.5",
+        lg: "h-12 px-7 text-base",
+        xl: "h-14 px-8 text-lg",
         icon: "h-10 w-10",
       },
     },

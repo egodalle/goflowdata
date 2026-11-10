@@ -9,6 +9,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Mail, MapPin, Send, Calendar } from 'lucide-react';
 import { z } from 'zod';
 import { supabase } from '@/integrations/supabase/client';
+import heroAnalytics from '@/assets/images/hero-analytics.jpg';
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, 'Name is required').max(100, 'Name must be less than 100 characters'),
@@ -85,9 +86,11 @@ const Contact = () => {
   return (
     <Layout>
       {/* Header */}
-      <section className="gf-section bg-gf-navy relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gf-cyan rounded-full blur-[120px]" />
+      <section className="gf-page-hero">
+        <div className="absolute inset-0">
+          <img src={heroAnalytics} alt="" className="h-full w-full object-cover opacity-25" />
+          <div className="absolute inset-0 bg-gf-navy/75" />
+          <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-gf-cyan/40 blur-[120px]" />
         </div>
         <div className="gf-container relative z-10">
           <motion.div
@@ -96,14 +99,12 @@ const Contact = () => {
             transition={{ duration: 0.5 }}
             className="max-w-3xl"
           >
-            <span className="inline-block px-4 py-1 rounded-full bg-gf-teal/10 text-gf-teal text-sm font-medium mb-4">
-              Contact Us
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
-              Let's Build Your Data Pipeline
+            <span className="gf-eyebrow mb-6">Contact</span>
+            <h1 className="mb-6 text-4xl font-semibold tracking-tight text-primary-foreground md:text-5xl">
+              Let's talk about your business goals
             </h1>
             <p className="text-xl text-primary-foreground/70">
-              Ready to transform your data infrastructure? Get in touch and we'll respond within 24 hours.
+              Tell us what you're trying to improve. Share a little about your systems, workflow, or data challenge and we'll follow up.
             </p>
           </motion.div>
         </div>
@@ -150,7 +151,7 @@ const Contact = () => {
                   <div>
                     <h3 className="font-semibold text-foreground">Schedule a Call</h3>
                     <p className="text-muted-foreground">
-                      Book a 30-minute consultation to discuss your data challenges.
+                      Email us to arrange a discovery conversation about your project.
                     </p>
                   </div>
                 </div>
@@ -188,9 +189,9 @@ const Contact = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="lg:col-span-2"
             >
-              <form onSubmit={handleSubmit} className="gf-card">
-                <h2 className="text-2xl font-bold text-foreground mb-6">
-                  Send Us a Message
+              <form onSubmit={handleSubmit} className="gf-card rounded-3xl p-8 md:p-10">
+                <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">
+                  Send us a message
                 </h2>
 
                 <div className="grid md:grid-cols-2 gap-6 mb-6">
