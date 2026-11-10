@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Calendar } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import heroAnalytics from '@/assets/images/hero-analytics.jpg';
 
 interface CTASectionProps {
   title?: string;
@@ -13,51 +14,39 @@ interface CTASectionProps {
 }
 
 export const CTASection = ({
-  title = "Ready to Transform Your Data?",
-  description = "Let's discuss how GoFlow can help you build reliable, scalable data pipelines that power your analytics and AI initiatives.",
-  primaryCTA = "Book a Consultation",
-  secondaryCTA = "View Our Work",
+  title = "Let's solve the right problem.",
+  description = "Tell us what you're trying to improve. We'll help shape a practical first step—data platform, AI workflow, or commerce analytics.",
+  primaryCTA = "Book a free discovery call",
+  secondaryCTA = "View our work",
   primaryLink = "/contact",
   secondaryLink = "/projects",
-}: CTASectionProps) => {
-  return (
-    <section className="gf-section gf-section-dark relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gf-teal rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-gf-cyan rounded-full blur-[100px]" />
+}: CTASectionProps) => (
+  <section className="bg-background px-4 pb-20 md:px-6 md:pb-28">
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="gf-container relative overflow-hidden rounded-[2rem] border border-white/10 bg-gf-navy px-8 py-16 md:px-16 md:py-20"
+    >
+      <img src={heroAnalytics} alt="" className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-20" />
+      <div className="absolute inset-0 bg-gf-navy/70" />
+      <div className="relative mx-auto max-w-2xl text-center">
+        <div className="pointer-events-none absolute -left-32 -top-24 h-64 w-64 rounded-full bg-gf-teal/20 blur-[90px]" />
+        <h2 className="relative mb-4 text-3xl font-semibold tracking-tight text-white text-balance md:text-5xl">
+          {title}
+        </h2>
+        <p className="relative mb-8 text-lg text-white/65">{description}</p>
+        <div className="relative flex flex-col justify-center gap-3 sm:flex-row">
+          <Button variant="hero" size="lg" asChild>
+            <Link to={primaryLink}>{primaryCTA}</Link>
+          </Button>
+          <Button variant="hero-outline" size="lg" asChild>
+            <Link to={secondaryLink}>
+              {secondaryCTA} <ArrowRight className="h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
       </div>
-
-      <div className="gf-container relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center max-w-3xl mx-auto"
-        >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6">
-            {title}
-          </h2>
-          <p className="text-lg md:text-xl text-primary-foreground/70 mb-8">
-            {description}
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button variant="hero" size="lg" asChild>
-              <Link to={primaryLink}>
-                <Calendar className="h-5 w-5" />
-                {primaryCTA}
-              </Link>
-            </Button>
-            <Button variant="hero-outline" size="lg" asChild>
-              <Link to={secondaryLink}>
-                {secondaryCTA}
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </Button>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-};
+    </motion.div>
+  </section>
+);

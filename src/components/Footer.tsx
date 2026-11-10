@@ -16,12 +16,12 @@ const footerLinks = {
 };
 
 export const Footer = () => (
-  <footer className="bg-gf-navy text-primary-foreground">
-    <div className="gf-container py-14">
+  <footer className="border-t border-white/5 bg-gf-navy text-primary-foreground">
+    <div className="gf-container py-16">
       <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <Link to="/" className="mb-4 flex items-center gap-2">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg gf-gradient-bg text-lg font-bold text-accent-foreground">G</span>
+            <span className="flex h-9 w-9 items-center justify-center rounded-full gf-gradient-bg text-lg font-bold text-accent-foreground">G</span>
             <span className="text-xl font-bold">GoFlow Data</span>
           </Link>
           <p className="mb-6 max-w-sm text-sm leading-relaxed text-primary-foreground/65">Modern data platforms, practical AI automation, and connected e-commerce analytics for growing businesses.</p>

@@ -2,6 +2,10 @@ import { motion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
 import { CTASection } from '@/components/CTASection';
 import { ArrowUpRight } from 'lucide-react';
+import projectInsurance from '@/assets/images/project-insurance.jpg';
+import projectCallcenter from '@/assets/images/project-callcenter.jpg';
+import projectAdtech from '@/assets/images/project-adtech.jpg';
+import projectHealthcare from '@/assets/images/project-healthcare.jpg';
 
 const projects = [
   {
@@ -18,6 +22,8 @@ const projects = [
       'Enabled agents to identify clients with violations for targeted services',
     ],
     color: 'from-purple-500 to-pink-500',
+    image: projectInsurance,
+    imageAlt: 'Insurance operations room with compliance analytics on screen',
   },
   {
     industry: 'Call Center',
@@ -33,6 +39,8 @@ const projects = [
       'Proactive alerting for pipeline failure monitoring',
     ],
     color: 'from-green-500 to-emerald-500',
+    image: projectCallcenter,
+    imageAlt: 'Call center operations floor with live monitoring screens',
   },
   {
     industry: 'AdTech',
@@ -48,6 +56,8 @@ const projects = [
       'Top-performing campaign identification by publisher',
     ],
     color: 'from-blue-500 to-cyan-500',
+    image: projectAdtech,
+    imageAlt: 'Media studio screens showing campaign performance charts',
   },
   {
     industry: 'Healthcare',
@@ -63,6 +73,8 @@ const projects = [
       'Scalable, high-performance semantic models',
     ],
     color: 'from-orange-500 to-red-500',
+    image: projectHealthcare,
+    imageAlt: 'Hospital analytics room with modern reporting displays',
   },
 ];
 
@@ -70,9 +82,11 @@ const Projects = () => {
   return (
     <Layout>
       {/* Header */}
-      <section className="gf-section bg-gf-navy relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute bottom-10 left-10 w-96 h-96 bg-gf-cyan rounded-full blur-[120px]" />
+      <section className="gf-page-hero">
+        <div className="absolute inset-0">
+          <img src={projectAdtech} alt="" className="h-full w-full object-cover opacity-25" />
+          <div className="absolute inset-0 bg-gf-navy/75" />
+          <div className="absolute bottom-10 left-10 h-96 w-96 rounded-full bg-gf-cyan/40 blur-[120px]" />
         </div>
         <div className="gf-container relative z-10">
           <motion.div
@@ -81,11 +95,9 @@ const Projects = () => {
             transition={{ duration: 0.5 }}
             className="max-w-3xl"
           >
-            <span className="inline-block px-4 py-1 rounded-full bg-gf-teal/10 text-gf-teal text-sm font-medium mb-4">
-              Case Studies
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
-              Selected Project Experience
+            <span className="gf-eyebrow mb-6">Case studies</span>
+            <h1 className="mb-6 text-4xl font-semibold tracking-tight text-primary-foreground md:text-5xl">
+              Selected project experience
             </h1>
             <p className="text-xl text-primary-foreground/70">
               Selected, generalized examples of data engineering work across different business contexts. Specific client identities and confidential details are omitted.
@@ -105,9 +117,12 @@ const Projects = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="gf-card overflow-hidden"
+                className="gf-card overflow-hidden p-0"
               >
-                <div className="grid lg:grid-cols-3 gap-8">
+                <div className="h-48 overflow-hidden md:h-56">
+                  <img src={project.image} alt={project.imageAlt} className="h-full w-full object-cover" />
+                </div>
+                <div className="grid gap-8 p-6 md:p-8 lg:grid-cols-3">
                   {/* Left Column - Overview */}
                   <div className="lg:border-r lg:border-border lg:pr-8">
                     <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r ${project.color} text-white text-sm font-semibold mb-4`}>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
+import heroAnalytics from '@/assets/images/hero-analytics.jpg';
 import airbytelogo from '@/assets/logos/airbyte-logo.png';
 import airflowlogo from '@/assets/logos/airflow-logo.png';
 import dbtlogo from '@/assets/logos/dbt-logo.png';
@@ -41,26 +42,31 @@ const blogPosts = [
 const Blog = () => {
   return (
     <Layout>
-      <section className="pt-32 pb-20">
-        <div className="gf-container">
+      <section className="gf-page-hero">
+        <div className="absolute inset-0">
+          <img src={heroAnalytics} alt="" className="h-full w-full object-cover opacity-25" />
+          <div className="absolute inset-0 bg-gf-navy/75" />
+        </div>
+        <div className="gf-container relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            transition={{ duration: 0.5 }}
+            className="mx-auto max-w-3xl text-center"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-gf-teal/10 text-gf-teal text-sm font-medium mb-4">
-              Our Blog
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Insights & <span className="gf-gradient-text">Resources</span>
+            <span className="gf-eyebrow mb-6">Our blog</span>
+            <h1 className="mb-6 text-4xl font-semibold tracking-tight text-primary-foreground md:text-5xl">
+              Insights & resources
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="mx-auto max-w-2xl text-lg text-primary-foreground/70">
               Stay updated with the latest in data engineering, best practices, and tool guides from our expert team.
             </p>
           </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        </div>
+      </section>
+      <section className="gf-section bg-background">
+        <div className="gf-container">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {blogPosts.map((post, index) => (
               <motion.div
                 key={post.slug}

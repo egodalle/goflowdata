@@ -4,6 +4,7 @@ import { CTASection } from '@/components/CTASection';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 
+import serviceData from '@/assets/images/service-data.jpg';
 import airbyteLogo from '@/assets/logos/airbyte-logo.png';
 import dbtLogo from '@/assets/logos/dbt-logo.png';
 import airflowLogo from '@/assets/logos/airflow-logo.png';
@@ -138,10 +139,12 @@ const TechStack = () => {
   return (
     <Layout>
       {/* Header */}
-      <section className="gf-section bg-gf-navy relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 right-20 w-80 h-80 bg-gf-teal rounded-full blur-[100px]" />
-          <div className="absolute bottom-10 left-20 w-60 h-60 bg-gf-cyan rounded-full blur-[80px]" />
+      <section className="gf-page-hero">
+        <div className="absolute inset-0">
+          <img src={serviceData} alt="" className="h-full w-full object-cover opacity-25" />
+          <div className="absolute inset-0 bg-gf-navy/75" />
+          <div className="absolute right-20 top-20 h-80 w-80 rounded-full bg-gf-teal/40 blur-[100px]" />
+          <div className="absolute bottom-10 left-20 h-60 w-60 rounded-full bg-gf-cyan/40 blur-[80px]" />
         </div>
         <div className="gf-container relative z-10">
           <motion.div
@@ -150,11 +153,9 @@ const TechStack = () => {
             transition={{ duration: 0.5 }}
             className="max-w-3xl"
           >
-            <span className="inline-block px-4 py-1 rounded-full bg-gf-teal/10 text-gf-teal text-sm font-medium mb-4">
-              Our Technology
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
-              Modern Data Stack
+            <span className="gf-eyebrow mb-6">Our technology</span>
+            <h1 className="mb-6 text-4xl font-semibold tracking-tight text-primary-foreground md:text-5xl">
+              Modern data stack
             </h1>
             <p className="text-xl text-primary-foreground/70">
               We use best-in-class, open-source and cloud-native tools to build reliable, scalable, and maintainable data platforms.
